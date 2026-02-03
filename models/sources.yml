@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: github_raw
+    description: "Raw GitHub data ingested by Airbyte"
+    database: AIRBYTE_DB           
+    schema: RAW_GITHUB            
+    tables:
+      - name: commits
+        description: "All commits for selected GitHub repos"
+      - name: issues
+        description: "All issues for selected GitHub repos"
+      - name: contributor_activity
+        description: "All contributor activity data"
+      - name: repositories
+        description: "Repository metadata for selected repos"
