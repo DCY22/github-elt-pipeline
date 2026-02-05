@@ -27,7 +27,6 @@ parsed as (
 
         -- commit message and timestamp info
         commit:message::string as commit_message,
-        commit:author:date::timestamp as authored_at,
         commit:committer:date::timestamp as committed_at,
 
         -- git author info

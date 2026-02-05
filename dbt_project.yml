@@ -1,5 +1,5 @@
 # Project name and version
-name: 'my_new_project'
+name: 'ELT_Process'
 version: '1.0.0'
 config-version: 2
 
@@ -22,7 +22,7 @@ clean-targets:
 
 # Materialization configuration
 models:
-  my_new_project:
+  ELT_Process:
     staging:
       +materialized: table   # all staging models are tables
       +schema: staging
