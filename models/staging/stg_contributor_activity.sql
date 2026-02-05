@@ -42,7 +42,7 @@ parsed as (
         name as contributor_name,
 
         -- Repository
-        repository as repository_name,
+        repository,
 
         -- Activity
         total as total_commits,

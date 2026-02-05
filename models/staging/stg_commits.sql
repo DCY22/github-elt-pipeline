@@ -34,7 +34,7 @@ parsed as (
 
         -- github user info
         author:login::string as github_author_login,
-        author:id::integer as github_author_id,
+        author:id::integer as author_id,
         created_at as commit_created_at
 
     from source
