@@ -16,9 +16,7 @@ issues_summary as (
         repository,
         count(*) as total_issues,
         sum(case when state = 'open' then 1 else 0 end) as open_issues,
-        sum(case when state = 'closed' then 1 else 0 end) as closed_issues,
-        min(created_at) as first_issue_date,
-        max(closed_at) as last_closed_issue_date
+        sum(case when state = 'closed' then 1 else 0 end) as closed_issues
     from {{ ref('stg_issues') }}
     group by repository
 )
@@ -27,15 +25,15 @@ issues_summary as (
 select
     c.repository,
     c.total_commits,
+    c.unique_commit_authors,
     c.first_commit_date,
     c.last_commit_date,
-    c.unique_commit_authors,
     
-    i.total_issues,
+    
+    
     i.open_issues,
     i.closed_issues,
-    i.first_issue_date,
-    i.last_closed_issue_date
+    i.total_issues
 
 from commits_summary c
 left join issues_summary i

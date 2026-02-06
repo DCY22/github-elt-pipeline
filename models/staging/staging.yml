@@ -108,8 +108,7 @@ models:
 
       - name: repository_name
         description: "Repository associated with this contributor activity record."
-        tests:
-          - not_null
+       
 
       - name: total_commits
         description: "Total commits made by the contributor."

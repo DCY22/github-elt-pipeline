@@ -1,11 +1,6 @@
 with source as (
 
     select
-        -- Airbyte metadata
-        _airbyte_raw_id,
-        _airbyte_extracted_at,
-        _airbyte_generation_id,
-
         -- Contributor identifiers
         id,
         login,
@@ -27,11 +22,6 @@ with source as (
 parsed as (
 
     select
-        -- Metadata
-        _airbyte_raw_id,
-        _airbyte_extracted_at,
-        _airbyte_generation_id,
-
         -- Contributor
         id as contributor_id,
         login as contributor_login,

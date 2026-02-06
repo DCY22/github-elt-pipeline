@@ -1,8 +1,6 @@
 with source as (
 
     select
-        _airbyte_raw_id,
-        _airbyte_extracted_at,
         sha,
         branch,
         created_at,
@@ -18,9 +16,6 @@ with source as (
 parsed as (
 
     select
-        _airbyte_raw_id,
-        _airbyte_extracted_at,
-
         sha as commit_sha,
         repository,
         branch,

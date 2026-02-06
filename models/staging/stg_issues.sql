@@ -1,9 +1,6 @@
 with source as (
 
     select
-        _airbyte_raw_id,
-        _airbyte_extracted_at,
-
         id as issue_id,
         number as issue_number,
 
@@ -28,9 +25,6 @@ with source as (
 parsed as (
 
     select
-        _airbyte_raw_id as airbyte_raw_id,
-        _airbyte_extracted_at as airbyte_extracted_at,
-
         issue_id,
         issue_number,
         repository,
