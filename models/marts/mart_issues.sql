@@ -7,8 +7,7 @@ with base as (
         i.state,
         i.created_at,
         i.closed_at,
-
-
+        
         -- contributor info for the author of the issue
         c.contributor_id,
         c.contributor_login
@@ -34,3 +33,5 @@ aggregated as (
 
 select *
 from aggregated
+where contributor_id is not null
+  and contributor_login is not null

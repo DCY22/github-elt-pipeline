@@ -31,10 +31,6 @@ models:
       - name: github_author_id
         description: "GitHub user id of the commit author (if available)."
 
-      - name: commit_message
-        description: "Message associated with the commit."
-        tests:
-          - not_null
 
 
   - name: stg_issues
