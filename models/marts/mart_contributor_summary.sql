@@ -3,7 +3,6 @@ with contributor_info as (
     select
         contributor_id,
         contributor_login,
-        contributor_name,
         repository
     from {{ ref('stg_contributor_activity') }}
 
@@ -37,7 +36,6 @@ issue_agg as (
 select
     ci.contributor_id,
     ci.contributor_login,
-    ci.contributor_name,
     ci.repository,
 
     coalesce(ca.total_commits, 0) as total_commits,

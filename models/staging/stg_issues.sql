@@ -3,18 +3,12 @@ with source as (
     select
         id as issue_id,
         number as issue_number,
-
         repository,
-        title,
-        body,
         state,
-        state_reason,
         comments as comment_count,
-
         created_at,
         updated_at,
         closed_at,
-
         user,
         assignee,
         pull_request
@@ -28,14 +22,8 @@ parsed as (
         issue_id,
         issue_number,
         repository,
-
-        title,
-        body,
-
         state,
-        state_reason,
         comment_count,
-
         created_at,
         updated_at,
         closed_at,

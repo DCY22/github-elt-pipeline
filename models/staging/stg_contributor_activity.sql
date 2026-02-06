@@ -7,12 +7,9 @@ with source as (
         type,
         site_admin,
 
-        -- Profile info
-        name,
-
         -- Repo context
         repository,
-        
+
         -- Contribution data
         total,
         weeks
@@ -27,9 +24,6 @@ parsed as (
         login as contributor_login,
         type as contributor_type,
         site_admin as is_site_admin,
-
-        -- Profile
-        name as contributor_name,
 
         -- Repository
         repository,
