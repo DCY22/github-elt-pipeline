@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: mart_contributor_summary
-    description: ""
+    description: "Mart model for analyzing indvidual contributor statisics"
     columns:
       - name: contributor_id
         data_type: number
@@ -44,7 +44,10 @@ models:
         description: "Time of the last issue for a user in this GitHub repo."
 
   - name: mart_issues
-    description: ""
+    description: "Mart model for analyzing issues statistics by contributor"
+    tests:  # singular test to ensure avg_days to close is greater than or equal to 0
+      - dbt_utils.expression_is_true:
+          expression: "avg_days_to_close >= 0"
     columns:
       - name: repository
         data_type: varchar
@@ -84,7 +87,7 @@ models:
         description: "Average number of days it takes a user to close an issue"
 
   - name: mart_repo_overview
-    description: ""
+    description: "Mart model for an overview of total repo statisics"
     columns:
       - name: repository
         data_type: varchar
