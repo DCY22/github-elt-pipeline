@@ -1,0 +1,32 @@
+# Project name and version
+name: 'ELT_Process'
+version: '1.0.0'
+config-version: 2
+
+# Profile name that connects to your warehouse (defined in profiles.yml)
+profile: 'default'
+
+# Paths for DBT to find models, macros, seeds, etc.
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Where dbt stores compiled SQL and artifacts
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Materialization configuration
+models:
+  ELT_Process:
+    staging:
+      +materialized: table   # all staging models are tables
+      +schema: staging
+    marts:
+      +materialized: view    # all marts models are views
+      +schema: marts      # <-- new schema for mart views
+

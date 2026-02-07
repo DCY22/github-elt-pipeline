@@ -1,0 +1,125 @@
+version: 2
+
+models:
+  - name: mart_contributor_summary
+    description: "Mart model for analyzing indvidual contributor statisics"
+    columns:
+      - name: contributor_id
+        data_type: number
+        description: "Unique GitHub user ID for the contributor."
+        tests:
+          - not_null
+          - unique
+
+      - name: contributor_login
+        data_type: varchar
+        description: "GitHub username of the issue creator."
+        tests:
+          - not_null
+
+      - name: repository
+        data_type: varchar
+        description: "Repository name the issue belongs to."
+        tests:
+          - not_null
+
+      - name: total_commits
+        data_type: number
+        description: "Total number of commits each user has made in this specified repo."
+
+      - name: last_commit_date
+        data_type: timestamp_ntz
+        description: "Time of the last commit for a user in this GitHub repo."
+
+      - name: total_issues
+        data_type: number
+        description: "Total number of issues each user has made in this specified repo."
+
+      - name: total_prs
+        data_type: number
+        description: "Total number of pull requests each user has made in this specified repo."
+
+      - name: last_issue_date
+        data_type: timestamp_tz
+        description: "Time of the last issue for a user in this GitHub repo."
+
+  - name: mart_issues
+    description: "Mart model for analyzing issues statistics by contributor"
+    tests:  # singular test to ensure avg_days to close is greater than or equal to 0
+      - dbt_utils.expression_is_true:
+          expression: "avg_days_to_close >= 0"
+    columns:
+      - name: repository
+        data_type: varchar
+        description: "Repository name the issue belongs to."
+        tests:
+          - not_null
+
+      - name: contributor_id
+        data_type: number
+        description: "Unique GitHub user ID for the contributor."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('mart_contributor_summary')
+              field: contributor_id
+
+      - name: contributor_login
+        data_type: varchar
+        description: "GitHub username of the issue creator."
+        tests:
+          - not_null
+
+      - name: total_issues
+        data_type: number
+        description: "Total number of issues each user has made in this specified repo."
+
+      - name: closed_issues
+        data_type: number
+        description: "Total number of closed issues each user has made in this specified repo."
+
+      - name: open_issues
+        data_type: number
+        description: "Total number of open issues each user has made in this specified repo."
+
+      - name: avg_days_to_close
+        data_type: number
+        description: "Average number of days it takes a user to close an issue"
+
+  - name: mart_repo_overview
+    description: "Mart model for an overview of total repo statisics"
+    columns:
+      - name: repository
+        data_type: varchar
+        description: "Repository name the issue belongs to."
+        tests:
+          - not_null
+          - unique
+
+      - name: total_commits
+        data_type: number
+        description: "Total number of commits each user has made in this specified repo."
+
+      - name: unique_commit_authors
+        data_type: number
+        description: "Total number of unique authors that have committed a change in this repo."
+
+      - name: first_commit_date
+        data_type: timestamp_tz
+        description: "Time of the first commit in this repo."
+
+      - name: last_commit_date
+        data_type: timestamp_tz
+        description: "Time of the last or most recent committ in this repo"
+
+      - name: open_issues
+        data_type: number
+        description: "Total number of issues that are currently open in this repo."
+
+      - name: closed_issues
+        data_type: number
+        description: "Total number of issues that have been closed in this repo."
+
+      - name: total_issues
+        data_type: number
+        description: "The total number of issues in this repo."

@@ -1,0 +1,112 @@
+version: 2
+
+models:
+  - name: stg_commits
+    description: "Staging model for GitHub commits from the raw Airbyte commits table."
+    columns:
+      - name: commit_sha
+        description: "Unique SHA hash identifying the commit."
+        tests:
+          - not_null
+          - unique
+
+      - name: repository
+        description: "Repository name the commit belongs to."
+        tests:
+          - not_null
+
+      - name: branch
+        description: "Branch name where the commit occurred."
+        tests:
+          - not_null
+
+      - name: committed_at
+        description: "Timestamp when the commit was committed."
+        tests:
+          - not_null
+
+      - name: github_author_login
+        description: "GitHub username of the commit author (if available)."
+
+      - name: github_author_id
+        description: "GitHub user id of the commit author (if available)."
+
+
+
+  - name: stg_issues
+    description: "Staging model for GitHub issues and pull requests from the raw Airbyte issues table."
+    columns:
+      - name: issue_id
+        description: "Unique GitHub ID for the issue."
+        tests:
+          - not_null
+          - unique
+
+      - name: issue_number
+        description: "Issue number unique within a repository."
+        tests:
+          - not_null
+
+      - name: repository
+        description: "Repository name the issue belongs to."
+        tests:
+          - not_null
+
+      - name: state
+        description: "Issue state (open or closed)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["open", "closed"]
+
+      - name: created_at
+        description: "Timestamp when the issue was created."
+        tests:
+          - not_null
+
+      - name: updated_at
+        description: "Timestamp when the issue was last updated."
+        tests:
+          - not_null
+
+      - name: author_login
+        description: "GitHub username of the issue creator."
+        tests:
+          - not_null
+
+      - name: author_id
+        description: "GitHub user ID of the issue creator."
+
+      - name: is_pull_request
+        description: "Boolean indicating whether the issue record is actually a pull request."
+        tests:
+          - not_null
+
+      - name: comment_count
+        description: "Number of comments on the issue."
+        tests:
+          - not_null
+
+
+  - name: stg_contributor_activity
+    description: "Staging model for contributor activity stats pulled from GitHub contributor endpoints."
+    columns:
+      - name: contributor_id
+        description: "Unique GitHub user ID for the contributor."
+        tests:
+          - not_null
+          - unique
+
+      - name: contributor_login
+        description: "GitHub username for the contributor."
+        tests:
+          - not_null
+
+      - name: repository_name
+        description: "Repository associated with this contributor activity record."
+       
+
+      - name: total_commits
+        description: "Total commits made by the contributor."
+        tests:
+          - not_null

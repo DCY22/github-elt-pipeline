@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: fact_issues
+    description: "Fact table containing one row per GitHub issue."
+    columns:
+      - name: issue_id
+        tests:
+          - not_null
+          - unique
+
+      - name: contributor_id
+        tests:
+          - not_null
+
+  - name: fact_contributor_activity
+    description: "Fact table summarizing contributor activity."
+    columns:
+      - name: contributor_id
+        tests:
+          - not_null
+          - unique
