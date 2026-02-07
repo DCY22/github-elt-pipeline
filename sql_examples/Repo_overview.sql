@@ -9,4 +9,4 @@ select
     closed_issues,
     first_commit_date,
     last_commit_date
-from DBT_DCARTER_MARTS.reporting_repo_overview;
+from marts.reporting_repo_overview;
