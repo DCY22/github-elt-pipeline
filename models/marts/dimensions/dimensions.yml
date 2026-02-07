@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: dim_contributor
+    description: "Dimension table containing contributor metadata."
+    columns:
+      - name: contributor_id
+        tests:
+          - not_null
+          - unique
+
+      - name: contributor_login
+        tests:
+          - not_null
